@@ -19,6 +19,7 @@ export default function Home() {
             minHeight: "56.25vw",
           }}
         /> */}
+        <h1>赤峰就业促进行动</h1>
         <div className="home-links">
           <div className="links-grid">
             <Link className="home-link policy-link" to="/policy">

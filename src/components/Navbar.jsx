@@ -13,7 +13,7 @@ export default function Navbar() {
             首页
           </NavLink>
           <NavLink to="/policy" className="nav-link">
-            就业政策
+            就业创业
           </NavLink>
           <NavLink to="/skill" className="nav-link">
             技能培训
