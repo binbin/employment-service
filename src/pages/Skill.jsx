@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import SearchBox from "../components/SearchBox";
 import "./Skill.css";
 import Timeline from "../components/Timeline";
 
@@ -126,32 +127,60 @@ const skillData = [
 ];
 
 export default function Skill() {
+  const [filteredData, setFilteredData] = useState(skillData);
+
+  const handleSearch = (searchTerm) => {
+    if (!searchTerm.trim()) {
+      setFilteredData(skillData);
+      return;
+    }
+
+    const filtered = skillData.filter(
+      (skill) =>
+        skill.政策名称.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        skill.政策内容.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        skill.享受对象.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        skill.经办单位.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
+
   return (
     <>
       <Navbar />
       <div className="skill-container">
+        <SearchBox placeholder="搜索技能培训..." onSearch={handleSearch} />
         <h2>技能照亮前程</h2>
         <div className="skill-list-wrapper">
-          {skillData.map((skill, i) => (
-            <div className="skill-card" key={i}>
-              <div className="skill-title">{skill.政策名称}</div>
-              <div className="skill-content">{skill.政策内容}</div>
-              <div className="skill-meta">
-                <span>享受对象：{skill.享受对象}</span>
-                <span>经办单位：{skill.经办单位}</span>
-              </div>
-              <details className="skill-details">
-                <summary>更多信息</summary>
-                <div>政策依据：{skill.政策依据}</div>
-                <div>申请要件：{skill.申请要件}</div>
-                <div>
-                  <h4>经办流程：</h4>
-                  <Timeline steps={skill.经办流程} />
+          {filteredData.length > 0 ? (
+            filteredData.map((skill, i) => (
+              <div className="skill-card" key={i}>
+                <div className="skill-title">{skill.政策名称}</div>
+                <div className="skill-content">{skill.政策内容}</div>
+                <div className="skill-meta">
+                  <span>享受对象：{skill.享受对象}</span>
+                  <span>经办单位：{skill.经办单位}</span>
                 </div>
-                <div>经办时限：{skill.经办时限}</div>
-              </details>
+                <div className="skill-details">
+                  <div className="skill-policy-basis">
+                    政策依据：{skill.政策依据}
+                  </div>
+                  <div className="skill-requirements">
+                    申请要件：{skill.申请要件}
+                  </div>
+                  <div className="skill-flow-section">
+                    <h4>经办流程：</h4>
+                    <Timeline steps={skill.经办流程} />
+                  </div>
+                  <div className="skill-time">经办时限：{skill.经办时限}</div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="no-results">
+              <p>没有找到相关培训信息，请尝试其他关键词</p>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </>

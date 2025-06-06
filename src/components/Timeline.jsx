@@ -22,7 +22,8 @@ function Timeline({ steps, isCompleted = false }) {
               isCompleted
                 ? "completed"
                 : index === stepList.length - 1
-                ? "current"
+                ? // ? "current"
+                  "completed"
                 : "pending"
             }`}
           >

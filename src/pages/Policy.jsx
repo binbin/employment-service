@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import SearchBox from "../components/SearchBox";
 import "./Policy.css";
 import Timeline from "../components/Timeline";
 
@@ -10,8 +11,7 @@ const policyData = [
     政策名称: "就业登记",
     主要对象: "自主创业者、灵活就业者、新入职人员",
     核心内容: "就业30日内登记，需身份证等材料",
-    办理流程: "线上线下申请 → 核验录入平台",
-    时限: "线上3日、线下即时",
+    办理流程: "线上线下申请→核验录入平台（线上3日、线下即时）",
     主管机构: "社区/乡镇或旗县就业服务中心",
   },
   {
@@ -19,17 +19,15 @@ const policyData = [
     政策名称: "失业登记",
     主要对象: "16–退休年龄、无业者",
     核心内容: "满足条件可登记失业",
-    办理流程: "同上（类似流程）",
-    时限: "同上",
-    主管机构: "同上",
+    办理流程: "线上线下申请→核验录入平台（线上3日、线下即时）",
+    主管机构: "社区/乡镇或旗县就业服务中心",
   },
   {
     序号: 3,
     政策名称: "就业创业证申领",
     主要对象: "已办就业/失业登记者",
     核心内容: "发证证明身份",
-    办理流程: "社区办理，系统发证",
-    时限: "线上3日、线下即时",
+    办理流程: "社区办理→系统发证（线上3日、线下即时）",
     主管机构: "社区/乡镇就业服务平台",
   },
   {
@@ -37,8 +35,7 @@ const policyData = [
     政策名称: "就业创业证核验",
     主要对象: "已持证者",
     核心内容: "跨省证件查询/核实",
-    办理流程: "平台查询核验",
-    时限: "即时",
+    办理流程: "平台查询核验（即时）",
     主管机构: "社区/乡镇就业服务机构",
   },
   {
@@ -224,30 +221,56 @@ const policyData = [
 ];
 
 export default function Policy() {
+  const [filteredData, setFilteredData] = useState(policyData);
+
+  const handleSearch = (searchTerm) => {
+    if (!searchTerm.trim()) {
+      setFilteredData(policyData);
+      return;
+    }
+
+    const filtered = policyData.filter(
+      (policy) =>
+        policy.政策名称.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        policy.核心内容.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        policy.主要对象.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        policy.主管机构.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
+
   return (
     <>
       <Navbar />
       <div className="policy-container">
+        <SearchBox placeholder="搜索就业政策..." onSearch={handleSearch} />
         <h2>就业创业好政策</h2>
         <div className="policy-list-wrapper">
-          {policyData.map((policy, i) => (
-            <div className="policy-card" key={i}>
-              <div className="policy-title">{policy.政策名称}</div>
-              <div className="policy-content">{policy.核心内容}</div>
-              <div className="policy-meta">
-                <span>主要对象：{policy.主要对象}</span>
-                <span>主管机构：{policy.主管机构}</span>
-              </div>
-              <details className="policy-details">
-                <summary>更多信息</summary>
-                <div>
-                  <h4>办理流程：</h4>
-                  <Timeline steps={policy.办理流程} />
+          {filteredData.length > 0 ? (
+            filteredData.map((policy, i) => (
+              <div className="policy-card" key={i}>
+                <div className="policy-title">{policy.政策名称}</div>
+                <div className="policy-content">{policy.核心内容}</div>
+                <div className="policy-meta">
+                  <span>主要对象：{policy.主要对象}</span>
+                  <span>主管机构：{policy.主管机构}</span>
                 </div>
-                <div>时限：{policy.时限}</div>
-              </details>
+                <div className="policy-details">
+                  <div className="policy-flow-section">
+                    <h4>办理流程：</h4>
+                    <Timeline steps={policy.办理流程} />
+                  </div>
+                  {policy.时限 && (
+                    <div className="policy-time">时限：{policy.时限}</div>
+                  )}
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="no-results">
+              <p>没有找到相关政策，请尝试其他关键词</p>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </>

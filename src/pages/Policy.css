@@ -42,15 +42,39 @@
   margin-bottom: 2px;
 }
 .policy-details {
-  margin-top: 6px;
+  margin-top: 12px;
   font-size: 0.97rem;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 12px;
 }
-.policy-details summary {
+
+.policy-flow-section {
+  margin-bottom: 8px;
+}
+
+.policy-flow-section h4 {
+  margin: 0 0 6px 0;
   color: #4f8cff;
-  cursor: pointer;
+  font-size: 0.98rem;
   font-weight: 600;
-  outline: none;
 }
-.policy-details[open] summary {
-  color: #38cfa6;
+
+.policy-time {
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(79, 140, 255, 0.08);
+}
+
+.no-results p {
+  margin: 0;
+  font-size: 1.1rem;
 }

@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <Navbar />
       <div className="home-container">
-        <iframe
+        {/* <iframe
           src="//player.bilibili.com/player.html?isOutside=true&aid=768098270&bvid=BV1zr4y1n78t&cid=571083289&p=1"
           scrolling="no"
           border="0"
@@ -18,7 +18,7 @@ export default function Home() {
             width: "100%",
             minHeight: "56.25vw",
           }}
-        />
+        /> */}
         <div className="home-links">
           <div className="links-grid">
             <Link className="home-link policy-link" to="/policy">
