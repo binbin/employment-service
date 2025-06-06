@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Navbar from "../components/Navbar";
 import SearchBox from "../components/SearchBox";
 import "./Jobs.css";
@@ -6,8 +6,12 @@ import "./Jobs.css";
 export default function Jobs() {
   const [jobs, setJobs] = useState(null);
   const [filteredJobs, setFilteredJobs] = useState(null);
+  const hasFetched = useRef(false);
 
   React.useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
     fetch("/Jobs.json")
       .then((res) => res.json())
       .then((data) => {
@@ -16,6 +20,7 @@ export default function Jobs() {
       })
       .catch((error) => {
         console.error("加载数据失败:", error);
+        hasFetched.current = false; // 失败时重置，允许重试
       });
   }, []);
 
