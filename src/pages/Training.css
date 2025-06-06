@@ -1,0 +1,37 @@
+.training-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 8px;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+.training-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px 14px;
+  margin-top: 18px;
+  font-size: 1rem;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.06);
+}
+.training-content ul {
+  margin: 16px 0 12px 18px;
+  padding: 0;
+  color: #444;
+  font-size: 0.98rem;
+}
+.training-link {
+  display: inline-block;
+  /* margin-top: 18px; */
+  background: linear-gradient(90deg, #4f8cff 0%, #38cfa6 100%);
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.training-link:active {
+  background: linear-gradient(90deg, #38cfa6 0%, #4f8cff 100%);
+  transform: scale(0.98);
+}

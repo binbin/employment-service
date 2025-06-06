@@ -1,0 +1,81 @@
+.timeline {
+  position: relative;
+  padding: 15px 0;
+  margin: 10px 0;
+}
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 0;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  flex-shrink: 0;
+  margin-right: 15px;
+  z-index: 2;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-dot.completed {
+  background-color: #1890ff;
+  color: white;
+}
+
+.timeline-dot.current {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.timeline-dot.pending {
+  background-color: #1890ff;
+  color: white;
+}
+
+.timeline-content {
+  flex: 1;
+  padding-top: 0;
+}
+
+.timeline-title {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 500;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 5px;
+  top: 22px;
+  bottom: -10px;
+  width: 2px;
+  background-color: #1890ff;
+  z-index: 1;
+}
+
+/* 最后一个项目不显示连接线 */
+.timeline-item:last-child .timeline-line {
+  display: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .timeline-dot {
+    margin-right: 10px;
+  }
+
+  .timeline-title {
+    font-size: 13px;
+  }
+}
