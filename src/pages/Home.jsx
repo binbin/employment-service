@@ -19,7 +19,15 @@ export default function Home() {
             minHeight: "56.25vw",
           }}
         /> */}
-        <h1>赤峰就业促进行动</h1>
+        <div className="hero-section">
+          <h1 className="hero-title">
+            <div className="title-highlight">赤峰市</div>
+            <div className="title-main">就业促进行动</div>
+          </h1>
+          <p className="hero-subtitle">
+            为您提供全方位的就业创业服务，助力美好职业未来
+          </p>
+        </div>
         <div className="home-links">
           <div className="links-grid">
             <Link className="home-link policy-link" to="/policy">
