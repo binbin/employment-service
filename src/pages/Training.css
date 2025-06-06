@@ -1,9 +1,9 @@
 .training-container {
-  max-width: 480px;
+  /* max-width: 480px; */
   margin: 0 auto;
   padding: 24px 8px;
   background: #f8fafc;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 .training-content {
   background: #fff;

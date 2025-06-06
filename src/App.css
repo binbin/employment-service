@@ -5,6 +5,20 @@
   margin: 0 auto;
   padding: 0;
   /* text-align: center; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8fafc;
+}
+
+.content-wrapper {
+  flex: 1;
 }
 
 .logo {

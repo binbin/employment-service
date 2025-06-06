@@ -31,7 +31,9 @@
 .skill-content {
   color: #333;
   font-size: 1.01rem;
-  margin-bottom: 2px;
+  white-space: pre-line;
+  line-height: 1.5;
+  margin: 0;
 }
 .skill-meta {
   color: #38cfa6;
@@ -39,13 +41,15 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 2px;
+  margin-bottom: 8px;
+}
+.skill-meta span {
+  white-space: pre-line;
+  line-height: 1.4;
 }
 .skill-details {
-  margin-top: 12px;
+  margin-top: 8px;
   font-size: 0.97rem;
-  border-top: 1px solid #f0f0f0;
-  padding-top: 12px;
 }
 .skill-policy-basis {
   color: #666;
@@ -72,6 +76,23 @@
   color: #666;
   font-size: 0.95rem;
   margin-top: 8px;
+}
+
+/* 经办单位在折叠面板中的样式 */
+.collapse-body span {
+  white-space: pre-line;
+  line-height: 1.4;
+  color: #38cfa6;
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.skill-time-content {
+  color: #666;
+  font-size: 0.95rem;
+  white-space: pre-line;
+  line-height: 1.4;
 }
 
 .no-results {

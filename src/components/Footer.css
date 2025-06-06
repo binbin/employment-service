@@ -1,0 +1,39 @@
+.footer {
+  background-color: #f8fafc;
+  color: #374151;
+  padding: 20px 0;
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-content p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .footer {
+    padding: 15px 0;
+  }
+
+  .footer-content {
+    padding: 0 15px;
+  }
+
+  .footer-content p {
+    font-size: 12px;
+  }
+}

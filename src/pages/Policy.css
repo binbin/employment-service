@@ -28,41 +28,50 @@
   color: #2a5d9f;
   margin-bottom: 4px;
 }
+
+/* 政策内容在折叠面板中的样式 */
 .policy-content {
   color: #333;
   font-size: 1.01rem;
-  margin-bottom: 2px;
+  white-space: pre-line;
+  line-height: 1.5;
+  margin: 0;
 }
+
 .policy-meta {
   color: #38cfa6;
   font-size: 0.95rem;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 2px;
-}
-.policy-details {
-  margin-top: 12px;
-  font-size: 0.97rem;
-  border-top: 1px solid #f0f0f0;
-  padding-top: 12px;
-}
-
-.policy-flow-section {
   margin-bottom: 8px;
 }
 
-.policy-flow-section h4 {
-  margin: 0 0 6px 0;
-  color: #4f8cff;
-  font-size: 0.98rem;
-  font-weight: 600;
+.policy-meta span {
+  white-space: pre-line;
+  line-height: 1.4;
 }
 
-.policy-time {
+.policy-details {
+  margin-top: 8px;
+  font-size: 0.97rem;
+}
+
+/* 经办单位在折叠面板中的样式 */
+.collapse-body span {
+  white-space: pre-line;
+  line-height: 1.4;
+  color: #38cfa6;
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.policy-time-content {
   color: #666;
   font-size: 0.95rem;
-  margin-top: 8px;
+  white-space: pre-line;
+  line-height: 1.4;
 }
 
 .no-results {

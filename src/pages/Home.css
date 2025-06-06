@@ -1,9 +1,8 @@
 .home-container {
-  max-width: 480px;
+  /* max-width: 480px; */
   margin: 0 auto;
   padding: 32px 16px;
   background: #f8fafc;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

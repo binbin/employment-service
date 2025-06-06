@@ -47,7 +47,7 @@
   font-size: 1.01rem;
   margin-bottom: 2px;
 }
-.jobs-contact {
+.jobs-contact a {
   color: #888;
   font-size: 0.95rem;
   display: flex;

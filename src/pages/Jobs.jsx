@@ -3,45 +3,39 @@ import Navbar from "../components/Navbar";
 import SearchBox from "../components/SearchBox";
 import "./Jobs.css";
 
-function parseCSV(text) {
-  const lines = text.split("\n").filter(Boolean);
-  const headers = lines[0].split(",");
-  const data = lines.slice(1).map((line) => line.split(","));
-  return { headers, data };
-}
-
 export default function Jobs() {
-  const [csv, setCsv] = useState(null);
+  const [jobs, setJobs] = useState(null);
   const [filteredJobs, setFilteredJobs] = useState(null);
 
   React.useEffect(() => {
-    fetch("/docs/3.就业岗位任你选.csv")
-      .then((res) => res.text())
-      .then((text) => {
-        const parsed = parseCSV(text);
-        setCsv(parsed);
-        setFilteredJobs(parsed);
+    fetch("/src/pages/Jobs.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setJobs(data);
+        setFilteredJobs(data);
+      })
+      .catch((error) => {
+        console.error("加载数据失败:", error);
       });
   }, []);
 
   const handleSearch = (searchTerm) => {
-    if (!csv) return;
+    if (!jobs) return;
 
     if (!searchTerm.trim()) {
-      setFilteredJobs(csv);
+      setFilteredJobs(jobs);
       return;
     }
 
-    const filtered = csv.data.filter((row) =>
-      row.some(
-        (cell) => cell && cell.toLowerCase().includes(searchTerm.toLowerCase())
+    const filtered = jobs.filter((job) =>
+      Object.values(job).some(
+        (value) =>
+          value &&
+          value.toString().toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
 
-    setFilteredJobs({
-      headers: csv.headers,
-      data: filtered,
-    });
+    setFilteredJobs(filtered);
   };
 
   return (
@@ -52,24 +46,42 @@ export default function Jobs() {
         <h2>就业岗位任你选</h2>
         <div className="jobs-list-wrapper">
           {filteredJobs ? (
-            filteredJobs.data.length > 0 ? (
-              filteredJobs.data.map((row, i) => (
+            filteredJobs.length > 0 ? (
+              filteredJobs.map((job, i) => (
                 <div className="jobs-card" key={i}>
                   <div className="jobs-title">
-                    {row[1]} <span className="jobs-company">@{row[0]}</span>
+                    {job.岗位名称}{" "}
+                    <span className="jobs-company">@{job.单位名称}</span>
                   </div>
                   <div className="jobs-meta">
-                    <span>
-                      薪资：{row[2] || "-"} ~ {row[3] || "-"}
-                    </span>
-                    <span>地点：{row[4]}</span>
-                    <span>学历：{row[5]}</span>
-                    <span>招聘人数：{row[7]}</span>
+                    {(job.月薪下限 || job.月薪上限) && (
+                      <span>
+                        薪资：{job.月薪下限 || "-"} ~ {job.月薪上限 || "-"}
+                      </span>
+                    )}
+                    <span>地点：{job.工作地点ADDRESS}</span>
+                    <span>学历：{job.学历要求}</span>
+                    <span>招聘人数：{job["招聘人数NEEDP_NUM"]}</span>
                   </div>
-                  <div className="jobs-desc">{row[6]}</div>
+                  <div className="jobs-desc">
+                    {job.岗位描述?.split("\n").map((line, index) => (
+                      <React.Fragment key={index}>
+                        {line}
+                        {index < job.岗位描述.split("\n").length - 1 && <br />}
+                      </React.Fragment>
+                    ))}
+                  </div>
                   <div className="jobs-contact">
-                    <span>联系人：{row[8]}</span>
-                    <span>电话：{row[9]}</span>
+                    <a
+                      href={`tel:${job.联系电话}`}
+                      style={{ color: "#007bff", textDecoration: "none" }}
+                    >
+                      <span>联系人：{job.联系人}</span>
+                      <span>
+                        电话：
+                        {job.联系电话}
+                      </span>
+                    </a>
                   </div>
                 </div>
               ))
