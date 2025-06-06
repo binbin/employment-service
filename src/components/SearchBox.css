@@ -21,6 +21,7 @@
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   box-sizing: border-box;
+  background: #fff;
 }
 
 .search-input:focus {
