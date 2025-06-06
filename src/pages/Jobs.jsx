@@ -8,7 +8,7 @@ export default function Jobs() {
   const [filteredJobs, setFilteredJobs] = useState(null);
 
   React.useEffect(() => {
-    fetch("/src/pages/Jobs.json")
+    fetch("/Jobs.json")
       .then((res) => res.json())
       .then((data) => {
         setJobs(data);
