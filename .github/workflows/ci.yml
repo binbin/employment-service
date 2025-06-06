@@ -1,48 +1,39 @@
-name: 持续集成
+name: 部署文档
 
 on:
   push:
-    branches: ["main", "master", "develop"]
-  pull_request:
-    branches: ["main", "master"]
+    branches:
+      # 确保这是你正在使用的分支名称
+      - main
 
 jobs:
-  # 代码质量检查
-  lint-and-test:
+  deploy-gh-pages:
     runs-on: ubuntu-latest
-
     steps:
-      - name: 检出代码
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          # 如果你文档需要 Git 子模块，取消注释下一行
+          # submodules: true
 
       - name: 设置 Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: "18"
-
-      - name: 设置 pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
-
-      - name: 获取 pnpm 存储目录
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: 设置 pnpm 缓存
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          node-version: "20.11.0"
+          cache: yarn
 
       - name: 安装依赖
-        run: pnpm install --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
-      - name: 运行 ESLint 检查
-        run: pnpm run lint
+      - name: 构建文档
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+        run: |-
+          yarn run build
 
-      - name: 构建项目
-        run: pnpm run build
+      - name: 部署文档
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
