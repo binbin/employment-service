@@ -165,13 +165,14 @@
   margin-bottom: 16px;
 }
 .hero-section .title-highlight {
-  color: #38cfa6;
+  /* color: #38cfa6; */
+  color: #3b82f6;
 }
 .hero-section .title-main {
   color: #3b82f6; /* 更饱和的蓝色，与青色形成完美渐变 */
 }
 .hero-section p {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   color: #6b7280;
   margin-bottom: 24px;
 }
